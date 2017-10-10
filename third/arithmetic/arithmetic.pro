@@ -24,9 +24,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    formula/Fraction.cpp \
+    formula/Generate.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    formula/ASMDOperation.h \
+    formula/Fraction.h \
+    formula/Generate.h \
+    formula/Operation.h \
+    formula/OperationFactory.h
 
 FORMS    += mainwindow.ui
 

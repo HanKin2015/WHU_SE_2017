@@ -9,6 +9,9 @@
 #include <QTextEdit>
 #include <QTimer>
 #include <QDateTime>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QTableWidget>
 
 namespace Ui {
 class MainWindow;
@@ -27,19 +30,20 @@ private:
     int timeId;
     int timeCnt = 0;
     QPushButton *startBtn = new QPushButton(this);
-    QPushButton *stopBtn = new QPushButton(this);
-    QPushButton *clearBtn = new QPushButton(this);
     QLabel *timeLabel = new QLabel(this);
     QTimer *timer = new QTimer(this);
-    QLineEdit *numberLE = new QLineEdit(this);
-    QGridLayout *layout = new QGridLayout;
+    QLineEdit *numberLE = new QLineEdit(this);  // 算式数量输入
+    QGridLayout *layout = new QGridLayout;      // 前两行的显示布局
+    QTableWidget *formulaWidget = new QTableWidget(this); // 算式显示窗体
+    QLabel *score = new QLabel(this);  // 分数
+    QLabel *userRecord = new QLabel(this);   // 用户历史记录卡
+    bool CanSubmit = false;
 
 private slots:
     void timing();
     void timerUpdate();
-    void timerStop();
-    void timerClear();
     void generate();
+    void judge();
 };
 
 #endif // MAINWINDOW_H
