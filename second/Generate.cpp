@@ -195,7 +195,7 @@ queue<Fraction> GenerateFormula(int opNum, int* bkLocation) {
 
         //生成运算数
         int isFraction = rand() % 5;
-        if(isFraction == 0) {
+        if(isFraction == 1) {
             int molecular = rand() % 10 + 1;        //分子
             int denomilator = rand() % 10 + 1;       //分母
             while(denomilator < molecular) denomilator = rand() % 10 + 1;
@@ -238,7 +238,10 @@ queue<Fraction> GenerateFormula(int opNum, int* bkLocation) {
     //生成运算数
     int isFraction = rand() % 5;
     if(isFraction == 0) {
-        Fraction number(rand() % 11, rand() % 11);
+        int molecular = rand() % 10 + 1;        //分子
+        int denomilator = rand() % 10 + 1;       //分母
+        while(denomilator < molecular) denomilator = rand() % 10 + 1;
+        Fraction number(molecular, denomilator);
         formula.push(number);
     }
     else {
@@ -257,7 +260,7 @@ queue<Fraction> GenerateFormula(int opNum, int* bkLocation) {
 
 Generate::Generate(int n) {
     for(int i = 1; i <= n; i++) {
-        int opNum = rand() % 10 + 1;  //运算符的个数1-10
+        int opNum = rand() % 4 + 1;  //运算符的个数1-10
         int bracketNum = 0;           //括号的个数0-2,跟运算符个数有关,默认为0
         if(opNum >= 4) {
             bracketNum = rand() % 3;

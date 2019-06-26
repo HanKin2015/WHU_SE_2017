@@ -1,4 +1,4 @@
-[Github项目]()
+[Github项目](https://github.com/HanKin2015/WHU_SE_2017)
 
 # 1、题目描述
 从《构建之法》第一章的 “程序” 例子出发，完成一个能自动生成小学四则运算题目的命令行 “软件”，满足以下需求：
@@ -7,8 +7,8 @@
 2. 运算符(operators)为 +, −, ×, ÷ （如运算符个数固定，则不得小于3）运算符的种类和顺序必须随机生成。
 3. 要求能处理用户的输入，并判断对错，打分统计正确率。
 4. 使用 -n 参数控制生成题目的个数，例如执行下面命令将生成5个题目  
-	- (以C/C++/C#为例) calgen.exe -n 5
-	- (以python为例) python3 calgen.py -n 5
+    - (以C/C++/C#为例) calgen.exe -n 5
+    - (以python为例) python3 calgen.py -n 5
 
 附加功能（算附加分）
 
@@ -37,8 +37,8 @@
 
 # 3、PSP
 
-| PSP2.1                                  | Personal Software Process Stages        | 预估耗时（分钟） | 实际耗时（分钟） |
-|-----------------------------------------|-----------------------------------------|------------------|------------------|
+| PSP2.1                                  |Personal Software Process Stages| 预估耗时(分) | 实际耗时(分)|
+|:-----------|:-------------|:----------------:|:----------------:|
 | Planning                                | 计划                                    |                  |                  |
 | · Estimate                              | · 估计这个任务需要多少时间              |    10              |                 |
 | Development                             | 开发                                    |                  |                  |
@@ -53,14 +53,15 @@
 | Reporting                               | 报告                                    |                  |                  |
 | · Test Report                           | · 测试报告                              |           30      |                 |
 | · Size Measurement                      | · 计算工作量                            |           50       |                  |
-| · Postmortem & Process Improvement Plan | · 事后总结, 并提出过程改进计划          |           30       |                  |
+| ·Postmortem&Process Improvement Plan | · 事后总结, 并提出过程改进计划          |           30       |                  |
 | 合计                                    |                                         |            860      |                 |
 
 ---
 
 # 4、代码说明
-1. 程序入口文件Main.cpp，其中包含了判断对错的Judg()函数。
-2. 分数类Fraction.h，分数类中函数的具体实现在Fraction.cpp中。
+1.程序入口文件Main.cpp，其中包含了判断对错的Judg()函数。
+2.分数类Fraction.h，分数类中函数的具体实现在Fraction.cpp中。
+
 ```C++
 #ifndef FRACTION_H_
 #define FRACTION_H_
@@ -99,7 +100,8 @@ private:
 #endif;
 ```
 
-3. 运算类Operaton.h。
+3.运算类Operaton.h。
+
 ```C++
 #ifndef OPERATION_H_
 #define OPERATION_H_
@@ -136,7 +138,8 @@ public:
 
 ```
 
-4. 简单工厂运算类OperationFactory.h。
+4.简单工厂运算类OperationFactory.h。
+
 ```C++
 #ifndef OPERATIONFACTORY_H_
 #define OPERATIONFACTORY_H_
@@ -176,7 +179,8 @@ private:
 #endif;
 ```
 
-5. 加减乘除类ASMDOperatiion.h。
+5.加减乘除类ASMDOperatiion.h。
+
 ```C++
 #ifndef ASMDOPERATION_H_
 #define ASMDOPERATION_H_
@@ -229,6 +233,7 @@ public:
 ```
 
 6.生成四则运算式子类Generate.h，具体实现函数在Generate.cpp中。
+
 ```C++
 #ifndef GENERATE_H_
 #define GENERATE_H_
@@ -258,6 +263,7 @@ public:
 ![](http://images.cnblogs.com/cnblogs_com/hankin2017/1078394/o_hj.png)
 # 6、单元测试
 自己写的简易程序测试，来不及写正规的单元测试。  
+
 ```C++
 #include<iostream>
 #include "Fraction.h"
@@ -290,8 +296,13 @@ int main()
     return 0;
 }
 ```
+
 # 7、总结
 大概实现了老师给的任务要求，但程序不是很完美，单元测试部分没有做。
 # 8、参考
-[前缀、中缀、后缀](http://blog.csdn.net/antineutrino/article/details/6763722)
+[前缀、中缀、后缀表达式](http://blog.csdn.net/antineutrino/article/details/6763722)
+[简单工厂模式](http://www.cnblogs.com/jostree/p/4251756.html)
+[构建之法](https://book.douban.com/subject/25965995/)
+[大话设计模式](https://book.douban.com/subject/2334288/)
+[VS2015安装与C++单元测试](http://www.cnblogs.com/xiaoyongwu/p/5289964.html)
 <!-- [后缀求值](http://www.cnblogs.com/nzbbody/p/3504199.html) -->

@@ -1,6 +1,7 @@
 #include "Fraction.h"
 #include <cmath>
 #include <cstdlib>
+#define eps 1e-7
 
 //辗转相除法求最大公约数
 int GCD(int a, int b) {
@@ -128,17 +129,17 @@ Fraction Fraction::GetReciprocal() {
     return temp;
 }
 
-//等号（用不到）
+//重载等号
 bool Fraction::operator ==(const Fraction &f) const {
     if(isNegative != f.isNegative) //不同号肯定不相等
         return false;
-    if(GetValue() == f.GetValue())
+    if(abs(GetValue() - f.GetValue()) < eps)
         return true;
     else
         return false;
 }
 
-//小于（用不到）
+//重载小于
 bool Fraction::operator <(const Fraction &f) const {
     if(isNegative == f.isNegative) { //同号比较大小
 

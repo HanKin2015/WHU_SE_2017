@@ -1,0 +1,165 @@
+#include "CFraction.h"
+#include <cmath>
+
+//辗转相除法求最大公约数
+int GCD(int& a, int& b) {
+    return b == 0 ? a : GCD(b, a % b);
+}
+
+//重载输出符
+ostream& operator<<(ostream& os, Fraction& f) {  //f代表一个分数
+    f.Simplification(); //化简
+    if(f.isNegative)    //负数
+        os << "-" << f.molecular << "/" << f.denomilator << endl;
+    else                //正数
+        os << f.molecular << "/" << f.denomilator << endl;
+    return os;
+}
+
+//构造函数，默认分数为正1
+Fraction::Fraction(int a, int b): isNegative(false) {
+    while(b == 0){
+        cout << "分母不能为0，请重新输入分母:" << endl;
+        cin >> b;
+    }
+    this->molecular = abs(a);
+    this->denomilator = abs(b);
+    if(a < 0 && b < 0)
+        this->isNegative = false;
+    else if(a < 0 || b < 0)
+        this->isNegative = true;
+    else
+        this->isNegative = false;
+    this->Simplification();
+}
+
+//得到分数值
+float Fraction::GetValue() const{
+    return this->molecular / (float)denomilator;
+}
+
+//化简函数，约分
+void Fraction::Simplification(){
+    int a = molecular, b = denomilator;
+    int ret = GCD(a, b);
+    molecular /= ret;
+    denomilator /= ret;
+}
+
+//重载加号
+Fraction Fraction::operator +(const Fraction &f)const
+{
+    Fraction temp;
+    if(isNegative == f.isNegative) { //同号相加
+    
+        temp.molecular = molecular * f.denomilator + denomilator * f.molecular;
+        temp.denomilator = denomilator * f.denomilator;
+        temp.isNegative = isNegative;
+    }
+    else {    // 不同号
+    
+        temp.molecular = abs(molecular * f.denomilator - denomilator * f.molecular);
+        temp.denomilator = abs(denomilator * f.denomilator);
+        if(this->GetValue() > f.GetValue())
+            temp.m_IsNegative = m_IsNegative;
+        else
+            temp.m_IsNegative = f.m_IsNegative;
+    }
+    return temp;
+}
+void CFraction::Show()
+{
+    cout << *this;
+}
+CFraction CFraction::operator -(const CFraction &f) const
+{
+    CFraction temp;
+    if(m_IsNegative == f.m_IsNegative) //同号相减
+    {
+        temp.m_molecular = abs(m_molecular * f.m_denomilator - m_denomilator * f.m_molecular);
+        temp.m_denomilator = m_denomilator * f.m_denomilator;
+        if(GetValue() >= f.GetValue())
+            temp.m_IsNegative = false;
+        else
+            temp.m_IsNegative = true;
+    }
+    else//异号相减
+    {
+        temp.m_molecular = m_molecular * f.m_denomilator + m_denomilator * f.m_molecular;
+        temp.m_denomilator = m_denomilator * f.m_denomilator;
+        temp.m_IsNegative = m_IsNegative;
+    }
+    return temp;
+}
+CFraction CFraction::operator *(const CFraction &f) const
+{
+    CFraction temp;
+    temp.m_molecular = m_molecular * f.m_molecular;
+    temp.m_denomilator = m_denomilator * f.m_denomilator;
+    //接下来确定符号
+    if(m_IsNegative == f.m_IsNegative) //同号相乘符号为正
+        temp.m_IsNegative = false;
+    else
+        temp.m_IsNegative = true;
+    return temp;
+
+}
+CFraction CFraction::operator /(CFraction &f) const
+{
+    CFraction temp, r;
+    r = f.GetReciprocal();
+    temp = *this * r;
+    return temp;
+}
+CFraction CFraction::GetReciprocal()
+{
+    CFraction temp;
+    temp.m_denomilator = m_molecular;
+    temp.m_molecular = m_denomilator;
+    temp.m_IsNegative = m_IsNegative;
+    return temp;
+}
+bool CFraction::operator ==(const CFraction &f) const
+{
+    if(m_IsNegative != f.m_IsNegative) //不同号肯定不相等
+        return false;
+    if(GetValue() == f.GetValue())
+        return true;
+    else
+        return false;
+}
+bool CFraction::operator <(const CFraction &f) const
+{
+    if(m_IsNegative == f.m_IsNegative) //同号比较大小
+    {
+        if(GetValue() < f.GetValue())
+        {
+            if(m_IsNegative)
+                return false;
+            else
+                return true;
+        }
+        else if(GetValue() > f.GetValue())
+        {
+            if(m_IsNegative)
+                return true;
+            else
+                return false;
+        }
+        else//相等的分数
+            return false;
+    }
+    else if(m_IsNegative)//左负友正
+        return true;
+    else// 左正右负
+        return false;
+}
+bool CFraction::operator >(const CFraction& f)const//大于号小于号刚好相反
+{
+    return (f < *this);
+}
+void CFraction::ChangeValue(int a, int b)
+{
+    *this = CFraction(a, b);
+}
+

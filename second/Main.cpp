@@ -29,6 +29,7 @@ bool Judge(Generate formula) {
         }
         if(charNumber == '-') {
             isNegative = true;
+            continue;
         }
         number = number * 10 + intNumber;
     }
@@ -37,14 +38,15 @@ bool Judge(Generate formula) {
         molecular = number;
         denomilator = 1;
     }
+    if(isNegative) molecular *= -1;
 //    cout << molecular << ' ' << denomilator << endl;
     Fraction ans(molecular, denomilator);
     if(ans == formula.result) {
-        cout << "正确！" << endl;
+        cout << "正确！" << endl << endl;
         return true;
     }
     else {
-        cout << "不正确！正确答案= " << formula.result << endl;
+        cout << "不正确！正确答案 = " << formula.result << endl << endl;
         return false;
     }
 }
